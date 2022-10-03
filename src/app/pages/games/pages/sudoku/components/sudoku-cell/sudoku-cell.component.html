@@ -1,0 +1,17 @@
+<span #cell
+      (focus)="sendIndices.emit({row, column})"
+      *ngIf="number"
+      class="span"
+      tabindex="0"
+>
+      {{ number }}
+  </span>
+
+<input #cell
+       (focus)="sendIndices.emit({row, column})"
+       (input)="handleInput(cell.value)"
+       (keydown)="disableArrowKeyInput($event)"
+       *ngIf="!number"
+       class="input"
+       type="number"
+>

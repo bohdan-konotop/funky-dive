@@ -1,0 +1,20 @@
+<header class="header">
+  <div (click)="showBurger()"
+       [ngClass]="{'header__burger--active': burger.isOpen}"
+       class="header__burger">
+    <span class="header__burger__span"></span>
+    <span class="header__burger__span"></span>
+    <span class="header__burger__span"></span>
+  </div>
+  <a *ngIf="title === null" class="header__back" routerLink="..">
+    <span class="header__back__span">&#10094;</span>
+    Back to previous page
+  </a>
+  <h2 *ngIf="title" class="header__title">{{title}}</h2>
+  <a class="header__logo" href="#">
+    <svg class="header__logo__img">
+      <use xlink:href="./assets/images/logo.svg#logo"></use>
+    </svg>
+  </a>
+  <custom-btn>Login</custom-btn>
+</header>

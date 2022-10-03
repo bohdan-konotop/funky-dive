@@ -1,0 +1,219 @@
+.video {
+  display: flex;
+  padding: 30px 60px 0;
+
+  &__player {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    padding-right: 30px;
+    box-sizing: border-box;
+  }
+
+  &__frame {
+    width: calc(100% + 1px);
+    height: 420px;
+    border-radius: 16px 16px 0 0;
+    margin-bottom: -5px;
+    margin-right: -1px;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--neutral-80);
+    box-sizing: border-box;
+    padding: 15px;
+    border-radius: 0 0 16px 16px;
+
+    &__left {
+      text-decoration: none;
+      color: var(--neutral-50);
+      font-weight: 600;
+
+      &:hover {
+        color: var(--neutral);
+      }
+    }
+
+    &__right {
+      &__views {
+        display: inline-flex;
+        align-items: center;
+        color: var(--neutral-50);
+        font-size: 15px;
+        padding-right: 15px;
+
+        &__icon {
+          width: 17px;
+          height: 17px;
+          padding-right: 4px;
+        }
+      }
+    }
+  }
+
+  &__history {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+    box-sizing: border-box;
+    padding: 15px 15px 0;
+    border-radius: var(--radius-block);
+    background: var(--neutral-80);
+
+    &__head {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      &__title {
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--neutral);
+      }
+    }
+
+    &__item {
+      text-align: justify;
+      font-size: 14px;
+      margin: 15px 0 0;
+      color: var(--neutral-50);
+      cursor: pointer;
+
+      &:hover {
+        color: var(--neutral-20);
+      }
+
+      &:active {
+        color: var(--neutral-100);
+      }
+    }
+
+    &__btn,
+    &__more {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--primary-main);
+      border: 0;
+      background: transparent;
+      text-decoration: none;
+
+      &:hover {
+        color: var(--primary-hover);
+      }
+
+      &:active {
+        color: var(--primary-active);
+      }
+    }
+
+  }
+}
+
+.title {
+  font-weight: 700;
+  font-size: 26px;
+  margin: 0 0 30px;
+}
+
+.games {
+  margin: 30px 60px 0;
+
+  &__cards__wrapper {
+    display: flex;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    text-decoration: none;
+    padding: 0 15px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+    &__img {
+      width: 100%;
+      border-radius: 16px 16px 0 0;
+    }
+
+    &__title {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--neutral);
+      background: var(--neutral-80);
+      text-decoration: none;
+      padding: 10px 0;
+      text-align: center;
+      margin: 0;
+      border-radius: 0 0 16px 16px;
+    }
+  }
+}
+
+.about {
+  margin: 30px 60px 0;
+
+  &__text {
+    font-size: 12px;
+    color: var(--neutral-50);
+    background: var(--neutral-80);
+    padding: 15px;
+    border-radius: var(--radius-block);
+    text-align: justify
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .video {
+    flex-direction: column;
+    padding: 30px 30px 0;
+
+    &__player {
+      width: 100%;
+      padding: 0;
+    }
+
+    &__history {
+      margin-top: 30px;
+      width: 100%;
+    }
+  }
+
+  .games {
+    margin: 30px 30px 0;
+
+    &__cards__wrapper {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    &__card {
+      width: 50%;
+      box-sizing: border-box;
+      padding: 0 15px 0 0;
+
+      &:nth-child(2n) {
+        padding: 0 0 0 15px;
+      }
+
+      &:nth-child(n + 3) {
+        padding-top: 30px;
+      }
+    }
+  }
+
+  .about {
+    margin: 30px 30px 0;
+  }
+}
+

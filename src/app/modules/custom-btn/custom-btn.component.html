@@ -1,0 +1,4 @@
+<button [disabled]="loading || disabled" [ngClass]="{'button--loading': loading}" [type]="btnType" class="button">
+  <btn-icon *ngIf="iconName !== null" [iconName]="iconName"></btn-icon>
+  <ng-content></ng-content>
+</button>

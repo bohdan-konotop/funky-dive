@@ -1,0 +1,8 @@
+<page>
+  <div class="wrapper">
+    <span [ngClass]="{'word--hidden': word === null}" class="word">{{!!word ? word : message}}</span>
+    <custom-btn (click)="randomize()" [loading]="loading" iconName="shuffle">
+      Randomize
+    </custom-btn>
+  </div>
+</page>

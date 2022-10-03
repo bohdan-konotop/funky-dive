@@ -1,0 +1,22 @@
+<section class="clue-adjuster">
+  <custom-btn
+    (click)="lessClues()"
+    [disabled]="minCluesReached || sudokuIsSolved"
+    class="less"
+    type="button"
+  >Less clues
+  </custom-btn
+  >
+  <custom-btn
+    (click)="moreClues()"
+    [disabled]="maxCluesReached || sudokuIsSolved"
+    class="more"
+    type="button"
+  >More clues
+  </custom-btn
+  >
+</section>
+<custom-btn (click)="handleNewSudokuRequest()" class="reset" iconName="shuffle" type="button"
+>Shuffle
+</custom-btn
+>

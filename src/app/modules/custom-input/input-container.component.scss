@@ -1,0 +1,55 @@
+:host {
+  position: relative;
+  background: inherit;
+}
+
+:host ::ng-deep .text-field {
+  &__input {
+    display: block;
+    width: 100%;
+    color: var(--neutral-50);
+    background-color: inherit;
+    border: 1px solid var(--neutral-50);
+    border-radius: var(--radius-btn);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0 10px;
+
+    &[type=number]::-webkit-inner-spin-button {
+      appearance: none;
+    }
+
+    &::placeholder {
+      color: transparent;
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 3px var(--neutral-20);
+    }
+
+    &:focus ~ .text-field__label,
+    &:not(:placeholder-shown) ~ .text-field__label {
+      top: 0;
+      transform: translateY(-50%) scale(0.75);
+    }
+
+    &:disabled, &[readonly] {
+      opacity: .7;
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: 50%;
+    left: 1%;
+    display: flex;
+    transform: translateY(-50%);
+    background-color: inherit;
+    color: var(--neutral-50);
+    padding-left: 7px;
+    padding-right: 7px;
+    transition: top 0.1s ease-in-out, scale 0.1s ease-in-out;
+  }
+}

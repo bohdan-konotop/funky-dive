@@ -1,0 +1,42 @@
+<page>
+  <div class="wrapper">
+    <form class="form">
+      <p class="form__limits">Limits</p>
+      <div class="form__input__wrapper">
+        <input-container>
+          <input
+            [formControl]="from"
+            autocomplete="off"
+            customField
+            id="from"
+            name="from"
+            type="number"
+          />
+          <label customLabel for="from">from</label>
+        </input-container>
+      </div>
+      <div class="form__input__wrapper">
+        <input-container>
+          <input
+            [formControl]="to"
+            autocomplete="off"
+            customField
+            id="to"
+            name="to"
+            type="number"
+          />
+          <label customLabel for="to">to</label>
+        </input-container>
+      </div>
+      <p
+        [ngClass]="{ 'form__result--hidden': result === null }"
+        class="form__result"
+      >
+        Result<br/><span class="form__result__span">{{
+        !!result ? result : 0
+        }}</span>
+      </p>
+      <custom-btn (click)="randomize()" [loading]="loading" class="form__btn" iconName="shuffle">Randomize</custom-btn>
+    </form>
+  </div>
+</page>

@@ -1,0 +1,11 @@
+<page>
+  <div class="wrapper">
+    <div [ngClass]="{'quote--hidden': quote === null}" class="quote">
+      <p class="quote__text">&ldquo; {{!!quote?.text ? quote?.text : 'Error'}} &rdquo;</p>
+      <span class="quote__author">{{!!quote?.author ? quote?.author : 'unknown'}}</span>
+    </div>
+    <custom-btn (click)="randomize()" [loading]="loading" iconName="shuffle">
+      Randomize
+    </custom-btn>
+  </div>
+</page>

@@ -1,0 +1,12 @@
+<page>
+  <div class="wrapper">
+    <iframe
+      [src]="'https://www.youtube.com/embed?listType=playlist&list='+playlistLink+'&index='+playlistIndex | safe"
+      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      class="video"
+      frameborder="0"
+    ></iframe>
+    <custom-btn (click)="randomize()" [loading]="loading" iconName="shuffle">Randomize</custom-btn>
+  </div>
+</page>

@@ -1,0 +1,79 @@
+@import "../../mixins";
+
+:host {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.board-wrapper {
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.row {
+  display: flex;
+
+  .cell-wrapper {
+    width: min(9vw, 70px);
+    height: min(9vw, 70px);
+    border: $light-border;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:first-child {
+      border-left: $strong-border;
+    }
+
+    &:nth-child(-3n + 6) {
+      border-right: $strong-border;
+    }
+
+    &:nth-child(3n + 4) {
+      border-left: none;
+    }
+
+    &:last-child {
+      border-right: $strong-border;
+    }
+
+    > * {
+      flex: 1;
+    }
+  }
+
+  &:first-child {
+    border-top: $strong-border;
+
+    .cell-wrapper {
+      border-top: none;
+    }
+  }
+
+  &:nth-child(-3n + 6) {
+    border-bottom: $strong-border;
+
+    .cell-wrapper {
+      border-top: none;
+    }
+  }
+
+  &:nth-child(-3n + 7) {
+    .cell-wrapper {
+      border-top: none;
+    }
+  }
+
+  &:last-child {
+    border-bottom: $strong-border;
+
+    .cell-wrapper {
+      border-bottom: none;
+    }
+  }
+}

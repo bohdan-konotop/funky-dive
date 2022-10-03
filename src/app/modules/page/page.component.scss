@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  background: var(--neutral-90);
+  min-height: 100vh;
+  color: var(--neutral);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 84%;
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: var(--neutral-90);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .main {
+    width: 100%;
+  }
+}
