@@ -1,0 +1,26 @@
+<div class="snake__container">
+  <div>
+    <app-snake-board
+      [boardSize]="boardSize"
+      [foods]="foods"
+      [snake]="snake"
+    ></app-snake-board>
+    <div class="snake__menu">
+      <app-game-menu
+        (newGameEvent)="restart()"
+        (pauseEvent)="pauseTick($event)"
+        [gameOver]="gameOver"
+        [paused]="paused"
+      ></app-game-menu>
+      <app-game-score [score]="score"></app-game-score>
+    </div>
+  </div>
+  <p class="snake__controls">
+    <strong>Controls</strong><br/>
+    Up: "{{ keyUp }}"<br/>
+    Down: "{{ keyDown }}"<br/>
+    Left: "{{ keyLeft }}"<br/>
+    Right: "{{ keyRight }}"<br/>
+    Pause / Continue: "{{ keyPause }}"<br/>
+    New Game: "{{ keyRestart }}"<br/>
+  </p>

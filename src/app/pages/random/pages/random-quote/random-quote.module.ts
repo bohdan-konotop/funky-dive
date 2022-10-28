@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { RandomQuoteComponent } from './random-quote.component';
 import { RandomQuoteRoutingModule } from './random-quote-routing.module';
-import { PageModule } from '@modules/page/page.module';
+import { MainPageModule } from '@modules/main-page/main-page.module';
 import { CustomBtnModule } from '@modules/custom-btn/custom-btn.module';
 import { RandomQuoteService } from '@services/random-quote.service';
 
@@ -11,7 +11,7 @@ import { RandomQuoteService } from '@services/random-quote.service';
   declarations: [RandomQuoteComponent],
   imports: [
     RandomQuoteRoutingModule,
-    PageModule,
+    MainPageModule,
     CustomBtnModule,
     CommonModule,
   ],

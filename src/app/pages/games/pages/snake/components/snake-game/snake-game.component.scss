@@ -1,0 +1,27 @@
+.snake {
+  &__container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+  }
+
+  &__menu {
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .snake {
+    &__container {
+      flex-direction: column;
+    }
+
+    &__controls {
+      padding-top: 30px;
+    }
+  }
+}

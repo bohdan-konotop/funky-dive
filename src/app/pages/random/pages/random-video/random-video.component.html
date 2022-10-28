@@ -1,4 +1,4 @@
-<page>
+<main-page>
   <div class="wrapper">
     <iframe
       [src]="'https://www.youtube.com/embed?listType=playlist&list='+playlistLink+'&index='+playlistIndex | safe"
@@ -9,4 +9,4 @@
     ></iframe>
     <custom-btn (click)="randomize()" [loading]="loading" iconName="shuffle">Randomize</custom-btn>
   </div>
-</page>
+</main-page>

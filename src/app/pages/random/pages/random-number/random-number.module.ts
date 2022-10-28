@@ -4,7 +4,7 @@ import { RandomNumberComponent } from './random-number.component';
 import { RandomNumberRoutingModule } from './random-number-routing.module';
 import { CustomInputModule } from '@modules/custom-input/custom-input.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PageModule } from '@modules/page/page.module';
+import { MainPageModule } from '@modules/main-page/main-page.module';
 import { CommonModule } from '@angular/common';
 import { CustomBtnModule } from '@modules/custom-btn/custom-btn.module';
 
@@ -14,7 +14,7 @@ import { CustomBtnModule } from '@modules/custom-btn/custom-btn.module';
     RandomNumberRoutingModule,
     CustomInputModule,
     ReactiveFormsModule,
-    PageModule,
+    MainPageModule,
     CommonModule,
     CustomBtnModule,
   ],

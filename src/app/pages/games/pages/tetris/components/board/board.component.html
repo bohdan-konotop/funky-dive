@@ -1,0 +1,5 @@
+<div *ngFor="let row of tetrisField | async" class="row">
+  <div *ngFor="let cell of row"
+       [ngClass]="{'cell--filled' : cell === null || cell === true}"
+       class="cell"></div>
+</div>

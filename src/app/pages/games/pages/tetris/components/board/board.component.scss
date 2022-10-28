@@ -1,0 +1,45 @@
+.row {
+  font-size: 0;
+  border-right: 2px solid var(--neutral-100);
+  border-left: 2px solid var(--neutral-100);
+
+  &:first-child {
+    border-top: 2px solid var(--neutral-100);
+
+    .cell {
+      border-top: 0;
+    }
+  }
+
+  &:last-child {
+    border-bottom: 2px solid var(--neutral-100);
+
+    .cell {
+      border-bottom: 0;
+    }
+  }
+
+  .cell {
+    &:first-child {
+      border-left: none;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+
+    &--filled {
+      background: var(--neutral-100);
+    }
+  }
+}
+
+.cell {
+  --cell-size: 25px;
+  display: inline-block;
+  height: var(--cell-size);
+  width: var(--cell-size);
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--neutral-80);
+}

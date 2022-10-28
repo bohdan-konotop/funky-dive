@@ -1,0 +1,28 @@
+.board {
+  --tile-size: 18px;
+  border: 2px solid var(--neutral-100);
+  margin: 30px auto 0;
+  width: calc(var(--tile-size) * var(--board-size));
+  height: calc(var(--tile-size) * var(--board-size));
+  position: relative;
+}
+
+.tile {
+  width: var(--tile-size);
+  height: var(--tile-size);
+  position: absolute;
+  background-color: var(--neutral-100);
+  border: 1px solid var(--neutral-50);
+  box-sizing: border-box;
+}
+
+.tile.food {
+  background-color: var(--semantic-red);
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 400px) {
+  .board {
+    --tile-size: 15px;
+  }
+}

@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'page',
-  templateUrl: './page.component.html',
-  styleUrls: ['./page.component.scss'],
+  selector: 'main-page',
+  templateUrl: './main-page.component.html',
+  styleUrls: ['./main-page.component.scss'],
 })
-export class PageComponent {
+export class MainPageComponent {
   @Input() title: string | null = null;
 }

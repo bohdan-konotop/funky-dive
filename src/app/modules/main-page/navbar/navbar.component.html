@@ -1,0 +1,53 @@
+<nav [ngClass]="{'nav--active': burger.isOpen}" class="nav">
+  <a class="nav__logo" href="#">
+    <svg class="nav__logo__img">
+      <use xlink:href="./assets/images/logo.svg#logo"></use>
+    </svg>
+  </a>
+  <ul class="nav__list">
+    <li class="nav__list__item">
+      <a [routerLinkActiveOptions]="{exact: true}" class="nav__list__item__link" routerLink="/"
+         routerLinkActive="nav__list__item__link--active">
+        <svg class="nav__list__item__link__icon">
+          <use xlink:href="./assets/images/icons/house.svg#house"></use>
+        </svg>
+        Home</a
+      >
+    </li>
+    <li class="nav__list__item">
+      <a class="nav__list__item__link" routerLink="/random" routerLinkActive="nav__list__item__link--active">
+        <svg class="nav__list__item__link__icon">
+          <use xlink:href="./assets/images/icons/shuffle.svg#shuffle"></use>
+        </svg>
+        Random</a
+      >
+    </li>
+    <li class="nav__list__item">
+      <a class="nav__list__item__link" routerLink="/games" routerLinkActive="nav__list__item__link--active">
+        <svg class="nav__list__item__link__icon">
+          <use xlink:href="./assets/images/icons/joystick.svg#joystick"></use>
+        </svg>
+        Games</a>
+    </li>
+    <li class="nav__list__item">
+      <a class="nav__list__item__link" href="#" routerLinkActive="nav__list__item__link--active">
+        <svg class="nav__list__item__link__icon">
+          <use
+            xlink:href="./assets/images/icons/accessibility.svg#accessibility"
+          ></use>
+        </svg>
+        Members</a
+      >
+    </li>
+    <li class="nav__list__item">
+      <a class="nav__list__item__link" href="#" routerLinkActive="nav__list__item__link--active">
+        <svg class="nav__list__item__link__icon">
+          <use
+            xlink:href="./assets/images/icons/wallpaper.svg#wallpaper"
+          ></use>
+        </svg>
+        Paintings</a
+      >
+    </li>
+  </ul>
+</nav>
