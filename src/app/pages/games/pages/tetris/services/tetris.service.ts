@@ -18,7 +18,7 @@ export class TetrisService {
   private tetrisField = new BehaviorSubject<Cell[][]>(this.createMatrix());
   public tetrisField$ = this.tetrisField.asObservable();
 
-  constructor(private figures: FigureService) {}
+  constructor(private figures: FigureService) { }
 
   public get field(): Cell[][] {
     return [...this.tetrisField.value];
@@ -47,7 +47,7 @@ export class TetrisService {
 
     const location = this.findShapeStartLocation(field);
 
-    const shape = this.findShape(field);
+    const shape = this.findShape(field, location);
 
     field = this.removeShapeFromField(field, shape, location);
 
@@ -55,13 +55,14 @@ export class TetrisService {
       shape.map((row) => row[i]).reverse()
     );
 
-    field = this.putShapeOnField(field, rotatedShape, location);
+    field = this.putShapeOnField(field, rotatedShape, location, shape);
 
     this.tetrisField.next(field);
   }
 
   public moveDown(): void {
     let field = this.field;
+    const backupField: Cell[][] = structuredClone(field);
 
     for (let i = field.length - 1; i >= 0; i--) {
       const row = field[i];
@@ -92,19 +93,14 @@ export class TetrisService {
           nextRow[shapeCellIndex] === null &&
           row[shapeCellIndex] !== undefined
         ) {
-          field = this.nullifying(field);
-          this.spawnShape();
+          field = this.nullifying(backupField);
+          Promise.resolve().then(() => this.spawnShape());
+        } else if (nextRow[shapeCellIndex] === null && row[shapeCellIndex] === undefined) {
+          nextRow[shapeCellIndex] = null;
+          row[shapeCellIndex] = false;
         } else {
-          if (
-            nextRow[shapeCellIndex] === null &&
-            row[shapeCellIndex] === undefined
-          ) {
-            nextRow[shapeCellIndex] = null;
-            row[shapeCellIndex] = false;
-          } else {
-            nextRow[shapeCellIndex] = row[shapeCellIndex];
-            row[shapeCellIndex] = false;
-          }
+          nextRow[shapeCellIndex] = row[shapeCellIndex];
+          row[shapeCellIndex] = false;
         }
       });
     }
@@ -113,9 +109,9 @@ export class TetrisService {
   }
 
   public moveLeft(): void {
-    const field = this.field;
+    let field = this.field;
 
-    this.moveLeftLogic(field);
+    field = this.moveLeftLogic(field);
 
     this.tetrisField.next(field);
   }
@@ -127,9 +123,9 @@ export class TetrisService {
       return row.reverse();
     };
 
-    const field = this.field.map(reverseRowWithShape);
+    let field = this.field.map(reverseRowWithShape);
 
-    this.moveLeftLogic(field);
+    field = this.moveLeftLogic(field);
 
     field.map(reverseRowWithShape);
 
@@ -142,7 +138,9 @@ export class TetrisService {
       .map(() => Array(this.matrixWidth).fill(false));
   }
 
-  private moveLeftLogic(field: Cell[][]): void {
+  private moveLeftLogic(field: Cell[][]): Cell[][] {
+    const backupField = structuredClone(field);
+
     field.forEach((row) => {
       if (!row.includes(true)) return;
 
@@ -157,11 +155,21 @@ export class TetrisService {
 
         if (!~shapeCellIndex || shapeCellIndex === 0) return;
 
-        checked.push(shapeCellIndex - 1);
-        row[shapeCellIndex - 1] = row[shapeCellIndex];
-        row[shapeCellIndex] = false;
+        if (row[shapeCellIndex - 1] === null && row[shapeCellIndex] === true) {
+          field = backupField;
+          checked.push(shapeCellIndex - 1);
+        } else if (row[shapeCellIndex] === undefined && row[shapeCellIndex - 1] === null) {
+          checked.push(shapeCellIndex - 1);
+          row[shapeCellIndex] = false;
+        } else {
+          checked.push(shapeCellIndex - 1);
+          row[shapeCellIndex - 1] = row[shapeCellIndex];
+          row[shapeCellIndex] = false;
+        }
       });
     });
+
+    return field;
   }
 
   private nullifying(field: Cell[][]): Cell[][] {
@@ -175,16 +183,27 @@ export class TetrisService {
     });
   }
 
-  private findShape(field: Cell[][]): Cell[][] {
+  private findShape(field: Cell[][], location: FigureLocation): Cell[][] {
+    let longestRow = 0;
+
     return field
       .filter((row) => {
-        return row.some((cell) => cell);
-      })
-      .map((row) =>
-        row.filter((cell) => {
-          return cell || cell === undefined;
-        })
-      );
+        if (row.some((cell) => cell)) {
+          const shapeRow = row.filter(cell => cell === undefined || cell);
+          if (shapeRow.length > longestRow) {
+            longestRow = shapeRow.length;
+          }
+
+          return shapeRow;
+        }
+        return false;
+      }).map(row => row.filter((_, i) => {
+        const startLocation = location.cellIndex || 0;
+
+        if (i >= startLocation && i < startLocation + longestRow) {
+          return true;
+        } else return false;
+      })).map(row => row.map(cell => cell === null ? undefined : cell));;
   }
 
   private findShapeStartLocation(field: Cell[][]): FigureLocation {
@@ -216,6 +235,7 @@ export class TetrisService {
         const rowIndex = location.rowIndex || 0;
         const cellIndex = location.cellIndex || 0;
 
+        if (field[rowIndex + i][cellIndex + j] === null) continue;
         field[rowIndex + i][cellIndex + j] = false;
       }
     }
@@ -225,18 +245,36 @@ export class TetrisService {
 
   private putShapeOnField(
     field: Cell[][],
-    shape: Cell[][],
-    location: FigureLocation
+    rotatedShape: Cell[][],
+    location: FigureLocation,
+    shape?: Cell[][]
   ): Cell[][] {
-    for (let i = 0; i < shape.length; i++) {
+    const fieldBackup = JSON.parse(JSON.stringify(field));
+
+    row:
+    for (let i = 0; i < rotatedShape.length; i++) {
       const rowIndex = location.rowIndex || 0;
       let cellIndex = location.cellIndex || 0;
 
-      for (let j = 0; j < shape[0].length; j++) {
-        if (cellIndex + shape[0].length > field[0].length)
-          cellIndex -= cellIndex + shape[0].length - field[0].length;
+      if (i + rowIndex > field.length - 1 && shape !== undefined) {
+        field = this.putShapeOnField(fieldBackup, shape, location);
+        break;
+      }
 
-        field[rowIndex + i][cellIndex + j] = shape[i][j];
+      for (let j = 0; j < rotatedShape[0].length; j++) {
+        if (cellIndex + rotatedShape[0].length > field[0].length)
+          cellIndex -= cellIndex + rotatedShape[0].length - field[0].length;
+
+        if (shape !== undefined && field[rowIndex + i][cellIndex + j] === null) {
+          field = this.putShapeOnField(fieldBackup, shape, location);
+          break row;
+        }
+
+        if (field[rowIndex + i][cellIndex + j] === null && rotatedShape[i][j] === undefined) {
+          continue;
+        };
+
+        field[rowIndex + i][cellIndex + j] = rotatedShape[i][j];
       }
     }
     return field;
