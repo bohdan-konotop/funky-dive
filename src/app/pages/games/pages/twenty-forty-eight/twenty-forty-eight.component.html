@@ -1,0 +1,48 @@
+<main-page>
+  <div class="game-container">
+    <div class="grid-container">
+      <div class="grid-row">
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+      </div>
+      <div class="grid-row">
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+      </div>
+      <div class="grid-row">
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+      </div>
+      <div class="grid-row">
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+      </div>
+
+      <div class="items">
+        <div
+          *ngFor="let item of gameService.items"
+          [ngStyle]="getStyles(item)"
+          class="item">
+          <div class="item-title">{{ item.value }}</div>
+        </div>
+      </div>
+      <div *ngIf="gameService.theEnd" class="overlay">
+        <div class="overlay-text">You lose</div>
+      </div>
+    </div>
+    <div class="game-info">
+      <custom-btn (click)="gameService.resetGame()">New Game</custom-btn>
+      <h2>
+        <strong>{{ gameService.scores }}</strong>
+      </h2>
+    </div>
+  </div>
+</main-page>

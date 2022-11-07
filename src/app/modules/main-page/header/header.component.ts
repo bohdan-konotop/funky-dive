@@ -1,5 +1,5 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { BurgerService } from '../../services/burger.service';
+import { Component, Inject, Input } from '@angular/core';
+import { BurgerService } from '@services/burger.service';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -7,7 +7,7 @@ import { DOCUMENT } from '@angular/common';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnDestroy, OnInit {
+export class HeaderComponent {
   @Input() title: string | null = null;
 
   private bodyClasses = this.document.body.classList;

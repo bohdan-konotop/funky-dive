@@ -54,15 +54,13 @@
 
 @media screen and (max-width: 900px) {
   .nav {
-    top: 80px;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     position: absolute;
     z-index: -1;
     background: transparent;
     transition: .5s;
-
 
     &--active &__list {
       transform: none;
@@ -75,12 +73,15 @@
 
     &__list {
       width: 260px;
-      height: 100%;
+      height: calc(100% - 90px);
+      padding-top: 90px;
       background: var(--neutral-100);
-      transition: .5s;
+      transition: 0.5s;
       transform: translateX(-260px);
     }
 
-    &__logo {display: none}
+    &__logo {
+      display: none
+    }
   }
 }

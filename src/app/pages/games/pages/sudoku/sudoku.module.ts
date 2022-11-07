@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { SudokuComponent } from './sudoku.component';
 import { SudokuRoutingModule } from './sudoku-routing.module';
-import { PageModule } from '@modules/page/page.module';
+import { MainPageModule } from '@modules/main-page/main-page.module';
 import { CommonModule } from '@angular/common';
 import { CustomBtnModule } from '@modules/custom-btn/custom-btn.module';
 import { SudokuCellComponent } from './components/sudoku-cell/sudoku-cell.component';
@@ -19,7 +19,7 @@ import { NavigationService } from './services/navigation.service';
     SudokuBoardComponent,
     SudokuControlsComponent,
   ],
-  imports: [SudokuRoutingModule, PageModule, CommonModule, CustomBtnModule],
+  imports: [SudokuRoutingModule, MainPageModule, CommonModule, CustomBtnModule],
   providers: [SudokuService, ClueService, NavigationService],
 })
 export class SudokuModule {}

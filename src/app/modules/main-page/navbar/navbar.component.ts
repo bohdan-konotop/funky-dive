@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { BurgerService } from '@services/burger.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { BurgerService } from '@services/burger.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnDestroy {
+export class NavbarComponent {
   constructor(public burger: BurgerService) {}
 
   ngOnDestroy() {
